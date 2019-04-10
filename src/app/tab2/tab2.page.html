@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Download file
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <!-- <ion-item-group>
+        <ion-item-divider>
+            <ion-label>Key</ion-label>
+        </ion-item-divider>
+        <form>
+            <ion-item [ngClass]="{'ion-invalid': keyFormControl.invalid}">
+                <ion-label>Secret file key:</ion-label>
+                <ion-input placeholder="ABCD1234" [formControl]="keyFormControl" required></ion-input>
+                <ion-button (click)="navFileInfo()" [disabled]="keyFormControl.invalid">Fetch</ion-button>
+            </ion-item>
+        </form>
+    </ion-item-group>
+
+    <ion-item-group margin-top>
+        <ion-item-divider>
+            <ion-label>QR code</ion-label>
+        </ion-item-divider>
+        <ion-button padding color="light" (click)="navFileInfo()">Scan</ion-button>
+    </ion-item-group>-->
+
+    <ion-list lines="none">
+        <form>
+            <ion-item class="ion-margin-top">
+                <ion-label class="ion-margin-end">Key:</ion-label>
+                <ion-input [formControl]="keyFormControl" required class="ion-margin-start ion-margin-end" type="text" placeholder="ABC123"></ion-input>
+                <ion-button class="item-button" (click)="navFileInfo()" [disabled]="keyFormControl.invalid" color="primary">Fetch</ion-button>
+            </ion-item>
+        </form>
+        <ion-item>
+            <ion-label position="stacked"></ion-label>
+            <ion-button fill="outline" size="expand">scan QR code</ion-button>
+        </ion-item>
+    </ion-list>
+</ion-content>

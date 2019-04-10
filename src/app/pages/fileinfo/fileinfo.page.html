@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [routerLink]="['/tabs/tab2']" defaultHref="tabs/tab2" [text]="Back"></ion-back-button>
+        </ion-buttons>
+        <ion-title>File info</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <!-- Show loading until content has loaded -->
+   <div *ngIf="fileInfo; else loading">
+       {{fileInfo.name}}
+       <br>
+       {{fileInfo.size}}
+   </div>
+    <ng-template #loading><ion-spinner color="secondary"></ion-spinner></ng-template>
+</ion-content>

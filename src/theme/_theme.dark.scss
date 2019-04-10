@@ -1,0 +1,20 @@
+.dark-theme {
+  // https://ionicframework.com/docs/theming/advanced
+  --ion-background-color: #1A1C1F;
+  --ion-text-color: #A1A4AA;
+  --ion-toolbar-background: #1A1C1F;
+  --ion-toolbar-color: white;
+  --ion-tab-bar-background: #212121;
+  --ion-tab-bar-color-activated: #478AFF;
+  --ion-placeholder-color: white;
+
+  ion-input {
+    --background: var(--ion-background-color);
+  }
+  ion-input.has-focus {
+    border-bottom: 3px solid var(--highlight-color-focused);
+  }
+  ion-card-title {
+    --color: var(--ion-text-color);
+  }
+}
