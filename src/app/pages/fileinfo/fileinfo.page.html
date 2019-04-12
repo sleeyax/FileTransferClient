@@ -8,11 +8,27 @@
 </ion-header>
 
 <ion-content padding>
-    <!-- Show loading until content has loaded -->
-   <div *ngIf="fileInfo; else loading">
-       {{fileInfo.name}}
-       <br>
-       {{fileInfo.size}}
-   </div>
+    <ion-list *ngIf="fileInfo; else loading">
+        <ion-item>
+           <strong>Name:</strong> {{fileInfo.name}}
+        </ion-item>
+        <ion-item>
+            <strong>Size:</strong> {{fileInfo.size}}
+        </ion-item>
+        <ion-item>
+            <strong>Downloads:</strong> {{fileInfo.downloads}} / {{fileInfo.max_downloads}}
+        </ion-item>
+        <ion-item>
+            <strong>Last modified:</strong> {{fileInfo.last_modified}}
+        </ion-item>
+    </ion-list>
     <ng-template #loading><ion-spinner color="secondary"></ion-spinner></ng-template>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-title>
+           <ion-button (click)="download()">Download</ion-button>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

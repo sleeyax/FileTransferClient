@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
-import {forEach} from "@angular-devkit/schematics";
-import {promise} from "selenium-webdriver";
-import IEventType = promise.IEventType;
 
 @Injectable({
     providedIn: 'root'
