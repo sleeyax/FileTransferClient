@@ -1,5 +1,5 @@
 .light-theme {
-  ion-input.has-focus {
-    border-bottom: 2px solid var(--highlight-color-focused);
+  ion-input {
+    background-color: var(--ion-color-light);
   }
 }

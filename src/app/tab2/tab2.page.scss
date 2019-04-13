@@ -1,6 +1,10 @@
-ion-item {
-  --full-highlight-height: 0;
+ion-input {
+  --background: var(--ion-background-color);
 }
+ion-input.has-focus {
+  border-bottom: 2px solid var(--highlight-color-focused);
+}
+
 ion-button.item-button {
   height: 80%;
   width: 100px;

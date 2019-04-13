@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {SettingsService} from "../../services/settings.service";
-import {DeviceService} from "../../services/device.service";
 import { File } from '@ionic-native/file/ngx';
+import {DeviceModule} from "../../modules/device.module";
 
 
 @Component({
@@ -20,7 +20,7 @@ export class FileinfoPage implements OnInit {
         private route: ActivatedRoute,
         private http: HttpClient,
         private settings: SettingsService,
-        private device: DeviceService,
+        private device: DeviceModule,
         private file: File
     ) {}
 

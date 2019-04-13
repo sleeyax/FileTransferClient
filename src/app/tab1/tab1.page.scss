@@ -1,4 +1,12 @@
-.welcome-card ion-img {
-  max-height: 35vh;
-  overflow: hidden;
+ion-label, .ion-label {
+  margin-right: 10px;
+}
+ion-input.ion-invalid {
+  border: 1px solid var(--ion-color-danger);
+}
+.validation-msg {
+  color: var(--ion-color-danger);
+}
+ion-title {
+  text-align: center;
 }

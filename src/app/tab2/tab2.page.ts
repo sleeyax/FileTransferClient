@@ -3,6 +3,7 @@ import {NavController} from "@ionic/angular";
 import {HttpClient} from "@angular/common/http";
 import {SettingsService} from "../services/settings.service";
 import {FormControl, Validators} from "@angular/forms";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 
 @Component({
     selector: 'app-tab2',
@@ -12,7 +13,7 @@ import {FormControl, Validators} from "@angular/forms";
 export class Tab2Page implements OnInit{
     public keyFormControl: FormControl;
 
-    constructor(private nav: NavController, private http: HttpClient, private settings: SettingsService) {}
+    constructor(private nav: NavController, private http: HttpClient, private settings: SettingsService, private qr: BarcodeScanner) {}
 
     ngOnInit(): void {
         // Validate user input of key input field
@@ -33,6 +34,15 @@ export class Tab2Page implements OnInit{
         if (this.keyFormControl.valid) {
             this.nav.navigateForward(`fileinfo/${this.keyFormControl.value}`);
         }
+    }
+
+    /**
+     * Scan QR code and set textbox to its value
+     */
+    public scanQR() {
+        this.qr.scan().then(data => {
+            this.keyFormControl.setValue(data.text);
+        }).catch(err => {console.log(err);});
     }
 
     /**

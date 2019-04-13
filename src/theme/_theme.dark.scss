@@ -8,12 +8,7 @@
   --ion-tab-bar-color-activated: #478AFF;
   --ion-placeholder-color: white;
 
-  ion-input {
-    --background: var(--ion-background-color);
-  }
-  ion-input.has-focus {
-    border-bottom: 2px solid var(--highlight-color-focused);
-  }
+
   ion-card-title {
     --color: var(--ion-text-color);
   }
