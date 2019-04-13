@@ -16,7 +16,7 @@
             <strong>Size:</strong> {{fileInfo.size}}
         </ion-item>
         <ion-item>
-            <strong>Downloads:</strong> {{fileInfo.downloads}} / {{fileInfo.max_downloads}}
+            <strong>Downloads:</strong> {{fileInfo.downloads}} {{fileInfo.max_downloads != 0 ? ' / ' + fileInfo.max_downloads : ''}}
         </ion-item>
         <ion-item>
             <strong>Last modified:</strong> {{fileInfo.last_modified}}

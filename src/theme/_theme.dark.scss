@@ -1,15 +1,21 @@
 .dark-theme {
-  // https://ionicframework.com/docs/theming/advanced
-  --ion-background-color: #1A1C1F;
-  --ion-text-color: #A1A4AA;
-  --ion-toolbar-background: #1A1C1F;
-  --ion-toolbar-color: white;
-  --ion-tab-bar-background: #212121;
-  --ion-tab-bar-color-activated: #478AFF;
-  --ion-placeholder-color: white;
+  --ion-color-primary: #7f49b1;
+  --highlight-color-focused: var(--ion-color-primary);
+  --ion-color-light: var(--ion-color-dark-tint);
 
+  // https://ionicframework.com/docs/theming/advanced
+  --ion-background-color: #212121;
+  --ion-text-color: #A1A4AA;
+  --ion-toolbar-background: var(--ion-background-color);
+  --ion-toolbar-color: white;
+  --ion-tab-bar-background: #1A1C1F;
+  --ion-placeholder-color: white;
 
   ion-card-title {
     --color: var(--ion-text-color);
+  }
+
+  ion-input {
+    background-color: var(--ion-color-dark-tint);
   }
 }

@@ -7,15 +7,22 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
+    <ion-list lines="none">
         <ion-item>
             <ion-label>Server</ion-label>
             <ion-input placeholder="URL" value="{{settings.server}}" [(ngModel)]="settings.server"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Toggle dark theme</ion-label>
-            <ion-toggle color="primary" (mousedown)="theme.toggle()" aria-checked="{{settings.darkThemeEnabled" [(ngModel)]="settings.darkThemeEnabled"></ion-toggle>
+            <ion-toggle color="primary" (mousedown)="theme.toggle()" [(ngModel)]="settings.darkThemeEnabled"></ion-toggle>
         </ion-item>
-        <ion-button expand="block" margin-top (click)="settings.saveAll()">Save</ion-button>
     </ion-list>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-title>
+            <ion-button class="save-btn" expand="block" color="primary" margin-top (click)="settings.saveAll()">Save</ion-button>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

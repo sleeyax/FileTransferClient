@@ -1,4 +1,6 @@
 .light-theme {
+  --ion-color-primary: #563D7C;
+  --highlight-color-focused: #563D7C;
   ion-input {
     background-color: var(--ion-color-light);
   }
