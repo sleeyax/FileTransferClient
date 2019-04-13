@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [routerLink]="['/tabs/tab1']" defaultHref="tabs/tab1" [text]="Back"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Share file</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <strong>Key:</strong> {{key}}
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-title>
+            <ion-button (click)="showQrCode()" color="primary">Show QR code</ion-button>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>
+

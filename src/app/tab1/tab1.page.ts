@@ -4,6 +4,8 @@ import {DeviceModule} from "../modules/device.module";
 import {File} from '@ionic-native/file/ngx';
 import {HttpClient} from "@angular/common/http";
 import {SettingsService} from "../services/settings.service";
+import {NavController} from "@ionic/angular";
+import {componentHostSyntheticProperty} from "@angular/core/src/render3";
 
 @Component({
     selector: 'app-tab1',
@@ -20,12 +22,13 @@ export class Tab1Page {
         private device: DeviceModule,
         private file: File,
         private http: HttpClient,
-        private settings: SettingsService
+        private settings: SettingsService,
+        private nav: NavController
     ) {
         this.uploadForm = formBuilder.group({
             maxDownloads: ['1', Validators.compose([
                 Validators.max(999),
-                Validators.min(1),
+                Validators.min(0),
                 Validators.required])
             ]
         });
@@ -64,7 +67,9 @@ export class Tab1Page {
                 formData.set('file', this.fileObj.blob, this.fileObj.name);
                 formData.set('max_downloads', this.uploadForm.controls.maxDownloads.value);
                 this.http.post(`${settings.server}/file/upload`, formData).subscribe(data => {
-                    console.log(data);
+                    if (data['status'] == 200) {
+                        this.nav.navigateForward(`fileshare/${data['key']}`);
+                    }
                 });
             });
         }
