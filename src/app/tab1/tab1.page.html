@@ -18,11 +18,11 @@
             </ion-item>
             <ion-item>
                 <span class="ion-label">File:</span>
-                <ion-input type="text" disabled="true" value="{{fileObj ? fileObj.path : ''}}"></ion-input>
+                <ion-input formControlName="filePath" type="text" disabled="true" value="{{fileObj ? fileObj.path : ''}}"></ion-input>
                 <ion-button class="browse-btn" color="light" size="default" (click)="browse()">Browse</ion-button>
             </ion-item>
-            <ion-item *ngIf="filePathInvalid" class="validation-msg">
-                <p class="ion-color-danger">Please choose a file</p>
+            <ion-item *ngIf="!uploadForm.controls.filePath.valid" class="validation-msg">
+                <p class="ion-color-danger">{{uploadForm.controls.filePath.errors.msg}}</p>
             </ion-item>
         </form>
     </ion-list>

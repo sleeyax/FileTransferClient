@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavController} from "@ionic/angular";
 import {HttpClient} from "@angular/common/http";
 import {SettingsService} from "../services/settings.service";
-import {AbstractControl, FormControl, Validators} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 
 @Component({

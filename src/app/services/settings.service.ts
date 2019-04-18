@@ -11,14 +11,13 @@ export class SettingsService {
 
     constructor(private storage: Storage) {
         this.default = <ISettings>{
-            server: 'http://127.0.0.1:8000',
+            server: 'https://ft.sleeyax.com',
             darkThemeEnabled: false
         };
-        this.server = this.default.server;
-        this.darkThemeEnabled = this.default.darkThemeEnabled;
 
-        this.storage.forEach((value, key) => {
-            this[key] = value;
+        this.load().then(settings => {
+            this.server = settings.server;
+            this.darkThemeEnabled = settings.darkThemeEnabled;
         });
     }
 
@@ -26,14 +25,23 @@ export class SettingsService {
      * Load all settings from storage
      */
     public load(): Promise<ISettings> {
-        return new Promise(async resolve => {
+        return Promise.all([
+            this.storage.get('server'),
+            this.storage.get('darkThemeEnabled')
+        ]).then(([server, darkThemeEnabled]) => {
+            return <ISettings> {
+                server: server != null ? server : this.default.server,
+                darkThemeEnabled: darkThemeEnabled != null ? darkThemeEnabled : this.default.darkThemeEnabled
+            };
+        });
+        /*return new Promise(async resolve => {
             const server = await this.storage.get('server');
             const darkThemeEnabled = await this.storage.get('darkThemeEnabled');
             resolve(<ISettings>{
                 server: server != null ? server : this.default.server,
                 darkThemeEnabled: darkThemeEnabled != null ? darkThemeEnabled : this.default.darkThemeEnabled
             });
-        });
+        });*/
     }
 
     /**
@@ -42,15 +50,6 @@ export class SettingsService {
     public async saveAll() {
         await this.storage.set('server', this.server);
         await this.storage.set('darkThemeEnabled', this.darkThemeEnabled);
-    }
-
-    /**
-     * Save single setting
-     * @param key
-     * @param value
-     */
-    public async saveAsync(key: string, value: string) {
-        await this.storage.set(key, value);
     }
 
     public get(key: 'server' | 'darkThemeEnabled') {

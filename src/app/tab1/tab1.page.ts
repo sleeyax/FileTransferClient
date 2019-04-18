@@ -5,7 +5,6 @@ import {File} from '@ionic-native/file/ngx';
 import {HttpClient} from "@angular/common/http";
 import {SettingsService} from "../services/settings.service";
 import {NavController} from "@ionic/angular";
-import {componentHostSyntheticProperty} from "@angular/core/src/render3";
 
 @Component({
     selector: 'app-tab1',
@@ -30,7 +29,8 @@ export class Tab1Page {
                 Validators.max(999),
                 Validators.min(0),
                 Validators.required])
-            ]
+            ],
+            filePath: ['', Validators.compose([])]
         });
     }
 
@@ -57,7 +57,7 @@ export class Tab1Page {
     public upload() {
         // If no file was specified, show error
         if (this.fileObj == null) {
-            this.filePathInvalid = true;
+            this.uploadForm.controls.filePath.setErrors({msg: 'Please choose a file'});
             return;
         }
 
