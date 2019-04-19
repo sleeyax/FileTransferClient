@@ -2,8 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {SettingsService} from "../../services/settings.service";
-import { File } from '@ionic-native/file/ngx';
+import {File, FileEntry} from '@ionic-native/file/ngx';
 import {DeviceModule} from "../../modules/device.module";
+import {LogModule} from "../../modules/log.module";
+import {StatusService} from "../../services/status.service";
+import {FileOpener} from "@ionic-native/file-opener/ngx";
 
 
 @Component({
@@ -15,13 +18,18 @@ export class FileinfoPage implements OnInit {
 
     public fileInfo: IFile;
     private key: string;
+    public downloadedFile: FileEntry;
+    public isDownloading: boolean;
 
     constructor(
         private route: ActivatedRoute,
         private http: HttpClient,
         private settings: SettingsService,
         private device: DeviceModule,
-        private file: File
+        private file: File,
+        private log: LogModule,
+        private status: StatusService,
+        private fileOpener: FileOpener
     ) {}
 
     ngOnInit() {
@@ -29,6 +37,7 @@ export class FileinfoPage implements OnInit {
         this.settings.load().then(() => {
             this.getFileInfo(this.key);
         });
+        this.isDownloading = false;
     }
 
     /**
@@ -53,8 +62,7 @@ export class FileinfoPage implements OnInit {
      * @param path
      * @param dir
      */
-    private createDir(path: string, dir: string)
-    {
+    private createDir(path: string, dir: string) {
         return new Promise(resolve => {
             this.file.createDir(path, dir, false).then(() => resolve(false)).catch(() => resolve(true));
         });
@@ -64,13 +72,34 @@ export class FileinfoPage implements OnInit {
      * Finally download the file
      */
     public async download() {
+        this.isDownloading = true;
         this.createDir(this.device.storage, "FileTransfer").then(() => {
-            this.http.get(`${this.settings.server}/file/download/${this.key}`, {responseType: "blob"}).subscribe(data => {
-                this.file.writeFile(this.device.storage + "/FileTransfer", this.fileInfo.name, data, {replace: true})
-                    .then(msg => {console.log(msg)})
-                    .catch(err => {console.log(err);});
+            this.http.get(`${this.settings.server}/file/download/${this.key}`, {responseType: "blob"}).subscribe(async (data) => {
+                // Check if max file downloads limit is reached
+                if (data['status'] != null && data['status'] == 403) {
+                    throw data['message']; // TODO: proper error handling
+                }
+
+                this.downloadedFile  = <FileEntry> await this.file.writeFile(this.device.storage + "/FileTransfer", this.fileInfo.name, data, {replace: true});
+                this.isDownloading = false;
             });
         });
+    }
+
+    /**
+     * Open folder of downloaded file
+     */
+    public openFolder() {
+        // TODO: find out how to open folders
+    }
+
+    /**
+     * Open downloaded file
+     */
+    public openFile() {
+        this.downloadedFile.file(file => {
+            this.fileOpener.open(this.downloadedFile.nativeURL, file.type);
+        })
     }
 
     /**
@@ -90,5 +119,5 @@ interface IFile {
     downloads: number,
     max_downloads: number,
     last_modified: string,
-    size: string
+    size: string,
 }

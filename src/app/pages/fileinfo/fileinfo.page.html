@@ -23,12 +23,28 @@
         </ion-item>
     </ion-list>
     <ng-template #loading><ion-spinner color="secondary"></ion-spinner></ng-template>
+
+    <ion-card *ngIf="downloadedFile != null && isDownloading == false;">
+        <ion-item>
+            <ion-icon name="download" slot="start"></ion-icon>
+            <ion-label>File downloaded!</ion-label>
+        </ion-item>
+
+        <ion-card-content class="ion-text-center">
+            <ion-button color="primary" (click)="openFile()">Open</ion-button>
+        </ion-card-content>
+    </ion-card>
+    <ion-spinner *ngIf="isDownloading" color="secondary"></ion-spinner>
+
 </ion-content>
 
 <ion-footer>
     <ion-toolbar>
         <ion-title>
-           <ion-button (click)="download()">Download</ion-button>
+           <ion-button
+                   disabled="{{fileInfo != null && fileInfo.max_downloads != 0 && fileInfo.max_downloads == fileInfo.downloads}}"
+                   (click)="download()">Download
+           </ion-button>
         </ion-title>
     </ion-toolbar>
 </ion-footer>

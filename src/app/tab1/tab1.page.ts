@@ -13,7 +13,6 @@ import {NavController} from "@ionic/angular";
 })
 export class Tab1Page {
     public uploadForm: FormGroup;
-    public filePathInvalid: boolean;
     public fileObj: IFile;
 
     constructor(

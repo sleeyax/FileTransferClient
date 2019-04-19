@@ -14,6 +14,8 @@
   --ion-tab-bar-background: #1A1C1F;
   --ion-placeholder-color: white;
 
+  --ion-icon-color: #ffffff;
+
   ion-card-title {
     --color: var(--ion-text-color);
   }
@@ -27,5 +29,9 @@
     --background-checked: var(--ion-color-primary);
     --handle-background: var(--ion-color-dark-tint);
     --handle-background-checked: var(--ion-color-dark-tint);
+  }
+
+  ion-icon {
+    --color: var(--ion-icon-color);
   }
 }
