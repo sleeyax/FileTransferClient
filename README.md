@@ -8,7 +8,7 @@ Currently, the process goes as follows:
 3. device B scans this QR code or enters the key directly in the input field 
 and downloads the file from the server
 
-Sharing files directly using bluetooth or TCP/UDP might be added in the future.
+Sharing files directly without a server in between might be added in the future.
 
 ## Supported devices
 This app was mainly designed for android phones, but I have included 

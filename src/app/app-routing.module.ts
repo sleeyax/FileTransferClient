@@ -4,7 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'fileinfo/:key', loadChildren: './pages/fileinfo/fileinfo.module#FileinfoPageModule' },
-  { path: 'fileshare/:key', loadChildren: './pages/fileshare/fileshare.module#FilesharePageModule' }
+  { path: 'fileshare/:key', loadChildren: './pages/fileshare/fileshare.module#FilesharePageModule' },
+  { path: 'filedownload/:key/:fileName', loadChildren: './pages/filedownload/filedownload.module#FiledownloadPageModule' }
 ];
 @NgModule({
   imports: [
