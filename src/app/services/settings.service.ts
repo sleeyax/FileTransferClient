@@ -34,14 +34,6 @@ export class SettingsService {
                 darkThemeEnabled: darkThemeEnabled != null ? darkThemeEnabled : this.default.darkThemeEnabled
             };
         });
-        /*return new Promise(async resolve => {
-            const server = await this.storage.get('server');
-            const darkThemeEnabled = await this.storage.get('darkThemeEnabled');
-            resolve(<ISettings>{
-                server: server != null ? server : this.default.server,
-                darkThemeEnabled: darkThemeEnabled != null ? darkThemeEnabled : this.default.darkThemeEnabled
-            });
-        });*/
     }
 
     /**

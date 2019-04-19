@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {Tab1Page} from './tab1.page';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DeviceModule} from "../modules/device.module";
+import {LogModule} from "../modules/log.module";
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import {DeviceModule} from "../modules/device.module";
         FormsModule,
         RouterModule.forChild([{path: '', component: Tab1Page}]),
         ReactiveFormsModule,
-        DeviceModule
+        DeviceModule,
     ],
     declarations: [Tab1Page]
 })

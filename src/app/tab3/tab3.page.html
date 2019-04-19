@@ -12,6 +12,9 @@
             <ion-label>Server</ion-label>
             <ion-input placeholder="URL" value="{{settings.server}}" [(ngModel)]="settings.server"></ion-input>
         </ion-item>
+        <ion-item *ngIf="!serverIsValid" class="validation-msg">
+            <p class="ion-color-danger">Failed to connect to server!</p>
+        </ion-item>
         <ion-item>
             <ion-label>Toggle dark theme</ion-label>
             <ion-toggle (mousedown)="theme.toggle()" [(ngModel)]="settings.darkThemeEnabled"></ion-toggle>
@@ -22,7 +25,7 @@
 <ion-footer>
     <ion-toolbar>
         <ion-title>
-            <ion-button class="save-btn" expand="block" color="primary" margin-top (click)="settings.saveAll()">Save</ion-button>
+            <ion-button class="save-btn" expand="block" color="primary" margin-top (click)="save()">Save</ion-button>
         </ion-title>
     </ion-toolbar>
 </ion-footer>

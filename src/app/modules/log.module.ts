@@ -7,8 +7,10 @@ import {DeviceModule} from "./device.module";
 @NgModule({
     declarations: [],
     imports: [
-        CommonModule
-    ]
+        CommonModule,
+        DeviceModule
+    ],
+    providers: [File, ToastController]
 })
 export class LogModule {
 
@@ -16,35 +18,47 @@ export class LogModule {
     private readonly errorLogFile: string;
 
     constructor(private toast: ToastController, private file: File, private device: DeviceModule) {
-        this.logPath = this.device.storage + '/logs';
+        this.logPath = this.device.storage + 'FileTransfer/logs/';
         this.errorLogFile = 'error-log.txt'
     }
 
-    /**
-     * Show an error message on the screen
-     * @param message
-     */
-    public async showError(message?: string) {
-        const toast = await this.toast.create({
-            message: message ? message : 'Fatal error! Check your log file',
-            duration: 5000,
-            showCloseButton: true,
-            closeButtonText: 'Close',
-            color: 'danger'
+    // TODO: duplicate code: put in helper file (maybe add date helpers etc. to this file too)
+    private createDir(path: string, dir: string) {
+        return new Promise(resolve => {
+            this.file.createDir(path, dir, false).then(() => resolve(false)).catch(() => resolve(true));
         });
-        toast.present();
+    }
+
+    /**
+     * Check if the file exists
+     * @param path
+     * @param file
+     */
+    private fileExists(path: string, file: string): Promise<boolean> {
+        return new Promise((resolve) => {
+            this.file.checkFile(path, file)
+                .then((exists) => {resolve(exists)})
+                .catch(() => {resolve(false)});
+        });
     }
 
     /**
      * Log an error message to the logs folder
      * @param error
      */
-    public async logError(error: string) {
-        const logExists = this.file.checkFile(this.logPath, this.errorLogFile);
-        if (logExists) {
-            this.file.writeExistingFile(this.logPath, this.errorLogFile, error);
-        } else {
-            this.file.writeFile(this.logPath, this.errorLogFile, error);
-        }
+    public logError(error: string) {
+        // Create filetransfer dir if it doesn't exist yet
+        this.createDir(this.device.storage, 'FileTransfer').then(() => {
+            // Create filetransfer/logs dir if it doesn't exist yet
+            return this.createDir(this.device.storage, 'FileTransfer/logs')
+        }).then(async () => {
+            // Check if the log file exists
+            return this.fileExists(this.logPath, this.errorLogFile);
+        }).then(fileExists => {
+            // Write to log file
+            return fileExists ?
+                this.file.writeExistingFile(this.logPath, this.errorLogFile, error) :
+                this.file.writeFile(this.logPath, this.errorLogFile, error);
+        });
     }
 }

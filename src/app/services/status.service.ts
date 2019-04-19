@@ -14,10 +14,27 @@ export class StatusService {
     public async showError(message?: string) {
         const toast = await this.toast.create({
             message: message ? message : 'Fatal error! Check your log file',
-            duration: 5000,
             showCloseButton: true,
             closeButtonText: 'Close',
-            color: 'danger'
+            color: 'danger',
+            position: 'top',
+            duration: 5000
+        });
+        toast.present();
+    }
+
+    /**
+     * Show success message
+     * @param message
+     */
+    public async showSuccess(message?: string) {
+        const toast = await this.toast.create({
+            message: message ? message : 'Operation success',
+            showCloseButton: true,
+            closeButtonText: 'Close',
+            color: 'success',
+            position: 'top',
+            duration: 3000
         });
         toast.present();
     }

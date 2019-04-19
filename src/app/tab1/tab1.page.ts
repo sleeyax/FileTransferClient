@@ -5,6 +5,8 @@ import {File} from '@ionic-native/file/ngx';
 import {HttpClient} from "@angular/common/http";
 import {SettingsService} from "../services/settings.service";
 import {NavController} from "@ionic/angular";
+import {StatusService} from "../services/status.service";
+import {LogModule} from "../modules/log.module";
 
 @Component({
     selector: 'app-tab1',
@@ -21,7 +23,9 @@ export class Tab1Page {
         private file: File,
         private http: HttpClient,
         private settings: SettingsService,
-        private nav: NavController
+        private nav: NavController,
+        private status: StatusService,
+        private logger: LogModule
     ) {
         this.uploadForm = formBuilder.group({
             maxDownloads: ['1', Validators.compose([
